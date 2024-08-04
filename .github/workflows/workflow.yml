@@ -28,10 +28,10 @@ jobs:
 
   call-infra:
     if: ${{ needs.changes.outputs.infra }}
-    uses: ./.github/workflows/workflow-infra.yml@main
+    uses: ./.github/workflows/workflow-infra.yml
     secrets: inherit
 
   call-app:
     if: ${{ needs.changes.outputs.app }}
-    uses: ./.github/workflows/workflow-app.yml@main
+    uses: ./.github/workflows/workflow-app.yml
     secrets: inherit
