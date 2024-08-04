@@ -9,29 +9,29 @@ on:
       - "main"
 
 jobs:
-  changes:
-    runs-on: ubuntu-latest
-    permissions:
-      pull-requests: read
-    outputs:
-      infra: ${{ steps.filter.outputs.infra }}
-      app: ${{ steps.filter.outputs.app }}
-    steps:
-    - uses: dorny/paths-filter@v3
-      id: filter
-      with:
-        filters: |
-          infra:
-            - 'infrastructure/**'
-          app:
-            - 'app/**'
+  # changes:
+  #   runs-on: ubuntu-latest
+  #   permissions:
+  #     pull-requests: read
+  #   outputs:
+  #     infra: ${{ steps.filter.outputs.infra }}
+  #     app: ${{ steps.filter.outputs.app }}
+  #   steps:
+  #   - uses: dorny/paths-filter@v3
+  #     id: filter
+  #     with:
+  #       filters: |
+  #         infra:
+  #           - 'infrastructure/**'
+  #         app:
+  #           - 'app/**'
 
   call-infra:
-    if: ${{ needs.changes.outputs.infra }}
+    # if: ${{ needs.changes.outputs.infra }}
     uses: ./.github/workflows/workflow-infra.yml
     secrets: inherit
 
   call-app:
-    if: ${{ needs.changes.outputs.app }}
+    # if: ${{ needs.changes.outputs.app }}
     uses: ./.github/workflows/workflow-app.yml
     secrets: inherit
