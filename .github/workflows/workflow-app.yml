@@ -14,4 +14,4 @@ jobs:
         run: echo 'deploy app'
 
       - name: secrets
-        run: echo ${{ secrets.SECRET_1 }}
+        run: echo "${{ secrets.SECRET_1 }}"
