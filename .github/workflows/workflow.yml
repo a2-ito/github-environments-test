@@ -40,4 +40,5 @@ jobs:
     uses: ./.github/workflows/workflow-app.yml
     secrets: inherit
     with:
-      is_app1_changed: ${{ needs.changes.outputs.app1 }}
+      infra: ${{ needs.changes.outputs.infra }}
+      app1: ${{ needs.changes.outputs.app1 }}

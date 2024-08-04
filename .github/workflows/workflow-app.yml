@@ -3,7 +3,7 @@ name: App workflow
 on:
   workflow_call:
     inputs:
-      is_app1_changed:
+      app1:
         type: string
         required: true
     secrets:
