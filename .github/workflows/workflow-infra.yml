@@ -9,6 +9,7 @@ on:
 jobs:
   deployment:
     runs-on: ubuntu-latest
+    environments: production
     steps:
       - name: deploy
         run: echo 'deploy infrastructure'
