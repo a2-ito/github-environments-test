@@ -1,0 +1,17 @@
+name: App1 workflow
+
+on:
+  workflow_call:
+    secrets:
+      SECRET_1:
+        required: true
+
+jobs:
+  deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: deploy
+        run: echo 'deploy app'
+
+      - name: secrets
+        run: echo "${{ secrets.SECRET_1 }}"

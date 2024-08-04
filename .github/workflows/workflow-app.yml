@@ -7,11 +7,22 @@ on:
         required: true
 
 jobs:
-  deployment:
+  changes:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+    outputs:
+      app1: ${{ steps.filter.outputs.app1 }}
     steps:
-      - name: deploy
-        run: echo 'deploy app'
+    - uses: actions/checkout@v3
+    - uses: dorny/paths-filter@v3
+      id: filter
+      with:
+        filters: |
+          app1:
+            - 'app1/**'
 
-      - name: secrets
-        run: echo "${{ secrets.SECRET_1 }}"
+  call-app1:
+    if: ${{ needs.changes.outputs.app1 == 'true' }}
+    uses: ./.github/workflows/workflow-app1.yml
+    secrets: inherit
