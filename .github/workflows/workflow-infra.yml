@@ -2,6 +2,9 @@ name: Infrastructure workflow
 
 on:
   workflow_call:
+    secrets:
+      SECRET_1:
+        required: true
 
 jobs:
   deployment:
