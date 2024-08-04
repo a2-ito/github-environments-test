@@ -4,6 +4,7 @@ on:
   workflow_call:
     inputs:
       is_app1_changed:
+        type: string
         required: true
     secrets:
       SECRET_1:
