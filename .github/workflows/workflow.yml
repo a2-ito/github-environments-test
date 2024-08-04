@@ -30,7 +30,6 @@ jobs:
   call-infra:
     # if: ${{ needs.changes.outputs.infra }}
     uses: ./.github/workflows/workflow-infra.yml
-    environment: Production
     secrets: inherit
 
   call-app:
