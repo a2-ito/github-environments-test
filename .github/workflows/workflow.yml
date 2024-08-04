@@ -1,0 +1,36 @@
+name: Main workflow
+
+on:
+  push:
+    paths:
+      - 'infrastructure/**'
+      - 'app/**'
+    branches:
+      - "main"
+
+jobs:
+  changes:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+    outputs:
+      infra: ${{ steps.filter.outputs.infra }}
+      app: ${{ steps.filter.outputs.app }}
+    - uses: dorny/paths-filter@v3
+      id: filter
+      with:
+        filters: |
+          infra:
+            - 'infrastructure/**'
+          app:
+            - 'app/**'
+
+  call-infra:
+    if: ${{ needs.changes.outputs.infra }}
+    uses: ./.github/workflows/workflow-infra.yml@main
+    secrets: inherit
+
+  call-app:
+    if: ${{ needs.changes.outputs.app }}
+    uses: ./.github/workflows/workflow-app.yml@main
+    secrets: inherit

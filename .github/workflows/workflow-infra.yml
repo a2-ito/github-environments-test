@@ -1,0 +1,15 @@
+name: Infrastructure workflow
+
+on:
+  workflow_call:
+
+jobs:
+  deployment:
+    runs-on: ubuntu-latest
+    environment: Production
+    steps:
+      - name: deploy
+        run: echo 'deploy infrastructure'
+
+      - name: secrets
+        run: echo ${{ secrets.SECRET_1 }}
