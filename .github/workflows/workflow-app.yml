@@ -11,6 +11,6 @@ on:
 
 jobs:
   call-app1:
-    if: ${{ is-app1-changed == 'true' }}
+    if: ${{ inputs.is_app1_changed == 'true' }}
     uses: ./.github/workflows/workflow-app1.yml
     secrets: inherit
