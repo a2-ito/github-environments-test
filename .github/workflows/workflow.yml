@@ -5,6 +5,7 @@ on:
     paths:
       - 'infrastructure/**'
       - 'app/**'
+      - '.github/workflows/**'
     branches:
       - "main"
 
