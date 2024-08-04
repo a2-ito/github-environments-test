@@ -16,6 +16,7 @@ jobs:
     outputs:
       infra: ${{ steps.filter.outputs.infra }}
       app: ${{ steps.filter.outputs.app }}
+    steps:
     - uses: dorny/paths-filter@v3
       id: filter
       with:
