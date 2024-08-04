@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - 'infrastructure/**'
-      - 'app/**'
+      - 'app1/**'
       - '.github/workflows/**'
     branches:
       - "main"
@@ -16,7 +16,7 @@ jobs:
       pull-requests: read
     outputs:
       infra: ${{ steps.filter.outputs.infra }}
-      app: ${{ steps.filter.outputs.app }}
+      app1: ${{ steps.filter.outputs.app1 }}
     steps:
     - uses: actions/checkout@v3
     - uses: dorny/paths-filter@v3
@@ -25,8 +25,8 @@ jobs:
         filters: |
           infra:
             - 'infrastructure/**'
-          app:
-            - 'app/**'
+          app1:
+            - 'app1/**'
 
   call-infra:
     needs: changes
