@@ -36,6 +36,6 @@ jobs:
 
   call-app:
     needs: call-infra
-    # if: ${{ needs.changes.outputs.app }}
+    if: ${{ needs.changes.outputs.app }}
     uses: ./.github/workflows/workflow-app.yml
     secrets: inherit
