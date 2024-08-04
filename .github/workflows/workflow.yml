@@ -39,3 +39,5 @@ jobs:
     if: ${{ ! failure() }}
     uses: ./.github/workflows/workflow-app.yml
     secrets: inherit
+    with:
+      is_app1_changed: ${{ needs.changes.outputs.app1 }}

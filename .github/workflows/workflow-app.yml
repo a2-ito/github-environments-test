@@ -2,27 +2,15 @@ name: App workflow
 
 on:
   workflow_call:
+    inputs:
+      is_app1_changed:
+        required: true
     secrets:
       SECRET_1:
         required: true
 
 jobs:
-  changes:
-    runs-on: ubuntu-latest
-    permissions:
-      pull-requests: read
-    outputs:
-      app1: ${{ steps.filter.outputs.app1 }}
-    steps:
-    - uses: actions/checkout@v3
-    - uses: dorny/paths-filter@v3
-      id: filter
-      with:
-        filters: |
-          app1:
-            - 'app1/**'
-
   call-app1:
-    if: ${{ needs.changes.outputs.app1 == 'true' }}
+    if: ${{ is-app1-changed == 'true' }}
     uses: ./.github/workflows/workflow-app1.yml
     secrets: inherit
