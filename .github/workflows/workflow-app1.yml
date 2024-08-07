@@ -5,6 +5,7 @@ on:
     secrets:
       SECRET_1:
         required: true
+  workflow_dispatch:
 
 jobs:
   deployment:
