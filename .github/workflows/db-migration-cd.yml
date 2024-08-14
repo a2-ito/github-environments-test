@@ -3,13 +3,13 @@ name: DB_MIGRATION_CD
 on:
   workflow_call:
     inputs:
-      user_db:
+      userdb:
         type: string
         required: true
-      report_db:
+      reportdb:
         type: string
         required: true
-      scope3_db:
+      scope3db:
         type: string
         required: true
     secrets:
