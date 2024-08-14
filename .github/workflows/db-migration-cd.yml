@@ -12,23 +12,6 @@ on:
       scope3db:
         type: string
         required: true
-    secrets:
-      SLACK_WEBHOOK_URL:
-        required: true
-      USER_DB_STRING_DEV:
-        required: true
-      USER_DB_STRING_STG:
-        required: true
-      USER_DB_STRING_PRD:
-        required: true
-      USER_DB_STRING_DEV:
-        required: true
-      BASTION_SSHKEY_DEV:
-        required: true
-      BASTION_SSHKEY_STG:
-        required: true
-      BASTION_SSHKEY_PRD:
-        required: true
 
 jobs:
   user-db-migration:
