@@ -12,6 +12,9 @@ on:
       scope3db:
         type: string
         required: true
+    secrets:
+      SLACK_WEBHOOK_URL:
+        required: true
 
 jobs:
   user-db-migration:
