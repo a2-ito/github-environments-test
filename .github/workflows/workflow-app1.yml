@@ -7,6 +7,10 @@ on:
         required: true
   workflow_dispatch:
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   deployment:
     runs-on: ubuntu-latest
