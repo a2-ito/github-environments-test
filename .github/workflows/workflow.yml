@@ -76,7 +76,7 @@ jobs:
   # call-db1 と重複して処理されないようにする必要がある
   call-db1-skipped:
     needs: changes
-    if: always() && contains(needs.*.result, 'skipped')
+    if: always()
     uses: ./.github/workflows/workflow-db.yml
     secrets: inherit
     with:
