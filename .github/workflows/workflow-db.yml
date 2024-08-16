@@ -6,9 +6,6 @@ on:
       db1:
         type: string
         required: true
-    secrets:
-      SECRET_1:
-        required: true
 
 jobs:
   call-db1:
