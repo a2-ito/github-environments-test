@@ -76,7 +76,6 @@ jobs:
     needs:
       - changes
       - call-db
-    if: !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled')
     uses: ./.github/workflows/workflow-app.yml
     secrets: inherit
     with:
