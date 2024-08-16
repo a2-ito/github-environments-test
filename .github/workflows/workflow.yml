@@ -40,7 +40,7 @@ jobs:
     secrets: inherit
 
   call-db:
-    if: always()
+    if: ${{ ! failure() }}
     needs: call-infra
     uses: ./.github/workflows/workflow-db.yml
     secrets: inherit
@@ -49,8 +49,7 @@ jobs:
 
   call-app1:
     if: always()
-    needs: changes
-    # needs: call-infra
+    needs: call-infra
     uses: ./.github/workflows/workflow-app.yml
     secrets: inherit
     with:
