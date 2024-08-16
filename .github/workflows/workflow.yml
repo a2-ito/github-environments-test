@@ -75,6 +75,7 @@ jobs:
 
   call-app:
     needs:
+      - changes
       - call-db
     uses: ./.github/workflows/workflow-app.yml
     secrets: inherit
@@ -85,8 +86,8 @@ jobs:
   # call-db1 と重複して処理されないようにする必要がある
   call-db-skipped:
     needs: 
-      - call-infra
       - changes
+      - call-infra
     # if: always()
     if: always() && needs.call-infra.result == 'skipped'
     uses: ./.github/workflows/workflow-db.yml
@@ -96,6 +97,7 @@ jobs:
 
   call-app-skipped:
     needs:
+      - changes
       - call-db-skipped
     if: always() && needs.call-infra.result == 'skipped'
     uses: ./.github/workflows/workflow-app.yml
