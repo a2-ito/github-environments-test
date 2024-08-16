@@ -61,7 +61,6 @@ jobs:
 
   # スキップされていない場合
   call-db:
-    if: !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled')
     needs:
       - changes
       - call-infra
