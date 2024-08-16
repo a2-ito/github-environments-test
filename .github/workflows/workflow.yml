@@ -72,6 +72,13 @@ jobs:
 
   # スキップされた場合
   # call-db1 と重複して処理されないようにする必要がある
+  call-db1-skipped:
+    needs: changes
+    if: always() && needs.call-infra.result != 'success'
+    uses: ./.github/workflows/workflow-db.yml
+    secrets: inherit
+    with:
+      db1: ${{ needs.changes.outputs.db1 }}
 
   call-app1:
     if: always()
