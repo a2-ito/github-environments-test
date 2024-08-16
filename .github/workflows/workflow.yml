@@ -39,9 +39,10 @@ jobs:
 
   call-infra:
     needs: changes
-    if: ${{ needs.changes.outputs.infra == 'true' }}
     uses: ./.github/workflows/workflow-infra.yml
     secrets: inherit
+    with:
+      infra: ${{ needs.changes.outputs.infra }}
 
   call-db-test:
     runs-on: ubuntu-latest
@@ -53,16 +54,18 @@ jobs:
 
   # needs で指定したジョブがスキップした場合、changes の outputs が 正しく取得できなくてスキップされてしまう
   # call-infra がスキップされた場合のジョブと、スキップされていない場合のジョブを用意しておく
+
+  # スキップされていない場合
   call-db1:
     #if: ${{ ! failure() }}
-    needs:
-      - call-infra
-      - changes
-      #if: always() && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled') && ${{ needs.changes.outputs.db1 }}
-    if: always() && ${{ needs.changes.outputs.db1 }}
+    needs: call-infra
+    if: always() && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled') && ${{ needs.changes.outputs.db1 }}
+      # if: always() && ${{ needs.changes.outputs.db1 }}
       # if: always() && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled')
     uses: ./.github/workflows/workflow-db1.yml
     secrets: inherit
+
+  # スキップされた場合
 
   call-app1:
     if: always()

@@ -1,0 +1,14 @@
+name: App workflow
+
+on:
+  workflow_call:
+    inputs:
+      infra:
+        type: string
+        required: true
+
+jobs:
+  call-infra:
+    if: ${{ inputs.infra == 'true' }}
+    uses: ./.github/workflows/workflow-infra.yml
+    secrets: inherit
