@@ -49,9 +49,9 @@ jobs:
 
   call-app1:
     if: always()
-      app1: ${{ needs.changes.outputs.app1 }}
     needs: changes
     # needs: call-infra
     uses: ./.github/workflows/workflow-app.yml
     secrets: inherit
     with:
+      app1: ${{ needs.changes.outputs.app1 }}
