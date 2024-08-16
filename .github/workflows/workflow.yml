@@ -33,11 +33,11 @@ jobs:
           app1:
             - 'app1/**'
 
-  call-infra:
-    needs: changes
-    if: ${{ needs.changes.outputs.infra == 'true' }}
-    uses: ./.github/workflows/workflow-infra.yml
-    secrets: inherit
+  # call-infra:
+  #   needs: changes
+  #   if: ${{ needs.changes.outputs.infra == 'true' }}
+  #   uses: ./.github/workflows/workflow-infra.yml
+  #   secrets: inherit
 
   call-app:
     if: always()
