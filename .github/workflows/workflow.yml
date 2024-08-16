@@ -41,6 +41,7 @@ jobs:
 
   call-app:
     if: always()
+    needs: changes
     # needs: call-infra
     uses: ./.github/workflows/workflow-app.yml
     secrets: inherit
