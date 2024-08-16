@@ -40,7 +40,7 @@ jobs:
     secrets: inherit
 
   call-app:
-    if: ${{ !cancelled() && !failure() }}
+    if: always() && needs.call-infra != 'failure'
     needs: call-infra
     uses: ./.github/workflows/workflow-app.yml
     secrets: inherit
