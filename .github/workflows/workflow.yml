@@ -37,12 +37,16 @@ jobs:
           db1:
             - 'db1/**'
 
+  # call-infra:
+  #   needs: changes
+  #   uses: ./.github/workflows/workflow-call-infra.yml
+  #   secrets: inherit
+  #   with:
+  #     infra: ${{ needs.changes.outputs.infra }}
   call-infra:
     needs: changes
-    uses: ./.github/workflows/workflow-call-infra.yml
+    uses: ./.github/workflows/workflow-infra.yml
     secrets: inherit
-    with:
-      infra: ${{ needs.changes.outputs.infra }}
 
   call-db-test:
     runs-on: ubuntu-latest
@@ -66,6 +70,7 @@ jobs:
     secrets: inherit
 
   # スキップされた場合
+  # call-db1 と重複して処理されないようにする必要がある
 
   call-app1:
     if: always()
