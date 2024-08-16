@@ -39,10 +39,9 @@ jobs:
 
   call-infra:
     needs: changes
-    uses: ./.github/workflows/workflow-call-infra.yml
+    if: ${{ needs.changes.outputs.infra == 'true' }}
+    uses: ./.github/workflows/workflow-infra.yml
     secrets: inherit
-    with:
-      infra: ${{ needs.changes.outputs.infra }}
 
   # call-infra:
   #   needs: changes
@@ -64,15 +63,22 @@ jobs:
   call-db:
     #if: ${{ ! failure() }}
     needs:
-      - changes
       - call-infra
-    if: always() && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled') && ${{ needs.changes.outputs.db1 }}
-      # if: always() && ${{ needs.changes.outputs.db1 }}
-      # if: always() && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled')
+    # if: always() && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled') && ${{ needs.changes.outputs.db1 }}
+    # if: always() && ${{ needs.changes.outputs.db1 }}
+    # if: always() && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled')
     uses: ./.github/workflows/workflow-db.yml
     secrets: inherit
     with:
       db1: ${{ needs.changes.outputs.db1 }}
+
+  call-app:
+    needs:
+      - call-db
+    uses: ./.github/workflows/workflow-app.yml
+    secrets: inherit
+    with:
+      app1: ${{ needs.changes.outputs.app1 }}
 
   # スキップされた場合
   # call-db1 と重複して処理されないようにする必要がある
@@ -81,15 +87,17 @@ jobs:
       - call-infra
       - changes
     # if: always()
-    if: always() && contains(needs.*.result, 'skipped')
+    if: always() && needs.call-infra.result == 'skipped'
     uses: ./.github/workflows/workflow-db.yml
     secrets: inherit
     with:
       db1: ${{ needs.changes.outputs.db1 }}
 
-  call-app1:
-    if: always()
-    needs: call-infra
+  call-app-skipped:
+    needs:
+      - call-infra
+      - call-db-skipped
+    if: always() && needs.call-infra.result == 'skipped'
     uses: ./.github/workflows/workflow-app.yml
     secrets: inherit
     with:
