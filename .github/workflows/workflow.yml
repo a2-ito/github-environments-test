@@ -44,8 +44,9 @@ jobs:
     secrets: inherit
 
   call-db:
-    if: ${{ ! failure() }}
-    needs: call-infra
+    #if: ${{ ! failure() }}
+    if: always()
+    needs: changes
     uses: ./.github/workflows/workflow-db.yml
     secrets: inherit
     with:
