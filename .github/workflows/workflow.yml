@@ -61,10 +61,10 @@ jobs:
 
   # スキップされていない場合
   call-db:
+    if: !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled')
     needs:
       - changes
       - call-infra
-    if: !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled')
     # if: always() && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled') && ${{ needs.changes.outputs.db1 }}
     # if: always() && ${{ needs.changes.outputs.db1 }}
     # if: always() && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled')
