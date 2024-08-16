@@ -12,6 +12,7 @@ on:
 
 jobs:
   call-db1:
+    if: ${{ github.event.inputs.db1 == 'true' }}
     uses: ./.github/workflows/workflow-db1.yml
     secrets: inherit
 

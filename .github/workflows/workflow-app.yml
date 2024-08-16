@@ -12,6 +12,7 @@ on:
 
 jobs:
   call-app1:
+    if: ${{ github.event.inputs.app1 == 'true' }}
     uses: ./.github/workflows/workflow-app1.yml
     secrets: inherit
 
