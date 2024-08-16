@@ -37,16 +37,17 @@ jobs:
           db1:
             - 'db1/**'
 
-  # call-infra:
-  #   needs: changes
-  #   uses: ./.github/workflows/workflow-call-infra.yml
-  #   secrets: inherit
-  #   with:
-  #     infra: ${{ needs.changes.outputs.infra }}
   call-infra:
     needs: changes
-    uses: ./.github/workflows/workflow-infra.yml
+    uses: ./.github/workflows/workflow-call-infra.yml
     secrets: inherit
+    with:
+      infra: ${{ needs.changes.outputs.infra }}
+
+  # call-infra:
+  #   needs: changes
+  #   uses: ./.github/workflows/workflow-infra.yml
+  #   secrets: inherit
 
   call-db-test:
     runs-on: ubuntu-latest
