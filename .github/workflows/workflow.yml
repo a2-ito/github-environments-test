@@ -63,6 +63,7 @@ jobs:
   call-db:
     #if: ${{ ! failure() }}
     needs:
+      - changes
       - call-infra
     # if: always() && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled') && ${{ needs.changes.outputs.db1 }}
     # if: always() && ${{ needs.changes.outputs.db1 }}
@@ -95,7 +96,6 @@ jobs:
 
   call-app-skipped:
     needs:
-      - call-infra
       - call-db-skipped
     if: always() && needs.call-infra.result == 'skipped'
     uses: ./.github/workflows/workflow-app.yml
