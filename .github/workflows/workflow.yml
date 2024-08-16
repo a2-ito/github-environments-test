@@ -76,6 +76,7 @@ jobs:
     needs:
       - changes
       - call-db
+    if: always() && needs.call-infra.result != 'skipped' && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled')
     uses: ./.github/workflows/workflow-app.yml
     secrets: inherit
     with:
