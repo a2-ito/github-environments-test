@@ -42,7 +42,7 @@ jobs:
     uses: ./.github/workflows/workflow-infra.yml
     secrets: inherit
 
-   call-app:
+  call-app:
     needs: call-infra
     if: ${{ ! failure() }}
     uses: ./.github/workflows/workflow-app.yml
