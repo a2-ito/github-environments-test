@@ -12,3 +12,10 @@ jobs:
     if: ${{ inputs.infra == 'true' }}
     uses: ./.github/workflows/workflow-infra.yml
     secrets: inherit
+
+  call-test:
+    runs-on: ubuntu-latest
+    needs: call-infra
+    steps:
+    - name: Run Shell
+      run: echo "Hello World"
