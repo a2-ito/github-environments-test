@@ -10,7 +10,7 @@ on:
 jobs:
   call-db1:
     if: ${{ github.event.inputs.db1 == 'true' }}
-    uses: ./.github/workflows/workflow-db1.yml
+    uses: a2-ito/github-environments-test/.github/workflows/workflow-db1.yml@main
     secrets: inherit
 
   # call-app1:
