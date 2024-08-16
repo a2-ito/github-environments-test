@@ -38,6 +38,11 @@ jobs:
   #   if: ${{ needs.changes.outputs.infra == 'true' }}
   #   uses: ./.github/workflows/workflow-infra.yml
   #   secrets: inherit
+  call-db:
+    if: always()
+    # needs: call-infra
+    uses: ./.github/workflows/workflow-db1.yml
+    secrets: inherit
 
   call-app:
     if: always()
