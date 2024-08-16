@@ -44,11 +44,9 @@ jobs:
     secrets: inherit
 
   call-db-test:
+    runs-on: ubuntu-latest
     needs: call-infra
     if: always() && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled')
-    with:
-      db1: ${{ needs.changes.outputs.db1 }}
-    runs-on: ubuntu-latest
     steps:
     - name: Run Shell
       run: echo "Hello World"
