@@ -6,6 +6,7 @@ on:
       - 'infrastructure/**'
       - 'app1/**'
       - '.github/workflows/**'
+      - 'db1/**'
     branches:
       - "main"
 
@@ -22,6 +23,7 @@ jobs:
     outputs:
       infra: ${{ steps.filter.outputs.infra }}
       app1: ${{ steps.filter.outputs.app1 }}
+      db1: ${{ steps.filter.outputs.db1 }}
     steps:
     - uses: actions/checkout@v3
     - uses: dorny/paths-filter@v3
@@ -32,6 +34,8 @@ jobs:
             - 'infrastructure/**'
           app1:
             - 'app1/**'
+          db1:
+            - 'db1/**'
 
   call-infra:
     needs: changes
