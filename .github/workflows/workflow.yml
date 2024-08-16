@@ -41,7 +41,6 @@ jobs:
 
   call-app:
     needs: call-infra
-    if: ${{ ! failure() }}
     uses: ./.github/workflows/workflow-app.yml
     secrets: inherit
     with:
