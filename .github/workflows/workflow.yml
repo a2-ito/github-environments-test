@@ -6,6 +6,7 @@ on:
       - 'infrastructure/**'
       - 'app1/**'
       - '.github/workflows/**'
+      - 'db1/**'
     branches:
       - "main"
 
