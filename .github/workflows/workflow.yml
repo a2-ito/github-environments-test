@@ -49,7 +49,7 @@ jobs:
   #   uses: ./.github/workflows/workflow-infra.yml
   #   secrets: inherit
 
-  call-db-test:
+  call-test:
     runs-on: ubuntu-latest
     needs: call-infra
     if: always() && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled')
@@ -61,7 +61,7 @@ jobs:
   # call-infra がスキップされた場合のジョブと、スキップされていない場合のジョブを用意しておく
 
   # スキップされていない場合
-  call-db1:
+  call-db:
     #if: ${{ ! failure() }}
     needs: call-infra
     if: always() && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled') && ${{ needs.changes.outputs.db1 }}
@@ -74,7 +74,7 @@ jobs:
 
   # スキップされた場合
   # call-db1 と重複して処理されないようにする必要がある
-  call-db1-skipped:
+  call-db-skipped:
     needs: changes
     if: always()
     uses: ./.github/workflows/workflow-db.yml
