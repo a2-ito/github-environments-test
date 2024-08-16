@@ -21,6 +21,7 @@ jobs:
     outputs:
       infra: ${{ steps.filter.outputs.infra }}
       app1: ${{ steps.filter.outputs.app1 }}
+      db1: ${{ steps.filter.outputs.db1 }}
     steps:
     - uses: actions/checkout@v3
     - uses: dorny/paths-filter@v3
@@ -31,6 +32,8 @@ jobs:
             - 'infrastructure/**'
           app1:
             - 'app1/**'
+          db1:
+            - 'db1/**'
 
   call-infra:
     needs: changes
@@ -38,8 +41,16 @@ jobs:
     uses: ./.github/workflows/workflow-infra.yml
     secrets: inherit
 
-  call-app:
+  call-db:
     needs: call-infra
+    if: ${{ ! failure() }}
+    uses: ./.github/workflows/workflow-db.yml
+    secrets: inherit
+    with:
+      db1: ${{ needs.changes.outputs.db1 }}
+
+  call-app:
+    needs: call-db
     if: ${{ ! failure() }}
     uses: ./.github/workflows/workflow-app.yml
     secrets: inherit

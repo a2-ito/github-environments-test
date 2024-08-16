@@ -1,0 +1,22 @@
+name: DB1 workflow
+
+on:
+  workflow_call:
+    secrets:
+      SECRET_1:
+        required: true
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: deploy
+        run: echo 'deploy db1'
+
+      - name: secrets
+        run: echo "${{ secrets.SECRET_1 }}"
