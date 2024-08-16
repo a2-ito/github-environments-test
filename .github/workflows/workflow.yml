@@ -51,9 +51,13 @@ jobs:
     - name: Run Shell
       run: echo "Hello World"
 
+  # needs で指定したジョブがスキップした場合、changes の outputs が 正しく取得できなくてスキップされてしまう
+  # call-infra がスキップされた場合のジョブと、スキップされていない場合のジョブを用意しておく
   call-db1:
     #if: ${{ ! failure() }}
-    needs: changes
+    needs:
+      - call-infra
+      - changes
       #if: always() && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled') && ${{ needs.changes.outputs.db1 }}
     if: always() && ${{ needs.changes.outputs.db1 }}
       # if: always() && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled')
