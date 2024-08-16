@@ -49,11 +49,3 @@ jobs:
     secrets: inherit
     with:
       app1: ${{ needs.changes.outputs.app1 }}
-
-  # call-db:
-  #   needs: call-infra
-  #   if: ${{ ! failure() }}
-  #   uses: ./.github/workflows/workflow-db.yml
-  #   secrets: inherit
-  #   with:
-  #     db1: ${{ needs.changes.outputs.db1 }}
