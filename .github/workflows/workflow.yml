@@ -51,7 +51,7 @@ jobs:
     - name: Run Shell
       run: echo "Hello World"
 
-  call-db:
+  call-db1:
     #if: ${{ ! failure() }}
     needs: call-infra
     if: always() && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled') && ${{ needs.changes.outputs.db1 }}
