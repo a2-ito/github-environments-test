@@ -45,8 +45,8 @@ jobs:
 
   call-db:
     #if: ${{ ! failure() }}
-    if: always()
-    needs: changes
+    needs: call-infra
+    if: always() &&  && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled')
     uses: ./.github/workflows/workflow-db.yml
     secrets: inherit
     with:
