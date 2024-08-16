@@ -53,7 +53,7 @@ jobs:
 
   call-db1:
     #if: ${{ ! failure() }}
-    needs: call-infra
+    needs: call-infra || changes
       #if: always() && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled') && ${{ needs.changes.outputs.db1 }}
     if: always() && ${{ needs.changes.outputs.db1 }}
       # if: always() && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled')
