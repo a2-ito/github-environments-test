@@ -42,11 +42,11 @@ jobs:
     if: always()
     needs: changes
     # needs: call-infra
-    uses: a2-ito/github-environments-test/.github/workflows/workflow-db.yml@main
+    uses: .github/workflows/workflow-db.yml@main
       #uses: ./.github/workflows/workflow-db.yml
     secrets: inherit
     with:
-      db1: true
+      db1: 'true'
 
   call-app1:
     if: always()
