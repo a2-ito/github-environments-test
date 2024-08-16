@@ -39,7 +39,7 @@ jobs:
 
   call-infra:
     needs: changes
-    uses: ./.github/workflows/workflow-infra.yml
+    uses: ./.github/workflows/workflow-call-infra.yml
     secrets: inherit
     with:
       infra: ${{ needs.changes.outputs.infra }}
