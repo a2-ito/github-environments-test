@@ -42,16 +42,16 @@ jobs:
     uses: ./.github/workflows/workflow-infra.yml
     secrets: inherit
 
-  call-db:
-    needs: call-infra
-    if: ${{ ! failure() }}
-    uses: ./.github/workflows/workflow-db.yml
-    secrets: inherit
-    with:
-      db1: ${{ needs.changes.outputs.db1 }}
+  # call-db:
+  #   needs: call-infra
+  #   if: ${{ ! failure() }}
+  #   uses: ./.github/workflows/workflow-db.yml
+  #   secrets: inherit
+  #   with:
+  #     db1: ${{ needs.changes.outputs.db1 }}
 
   call-app:
-    needs: call-db
+    needs: call-infra
     if: ${{ ! failure() }}
     uses: ./.github/workflows/workflow-app.yml
     secrets: inherit
