@@ -42,8 +42,7 @@ jobs:
     if: always()
     needs: changes
     # needs: call-infra
-    uses: .github/workflows/workflow-db.yml@main
-      #uses: ./.github/workflows/workflow-db.yml
+    uses: ./.github/workflows/workflow-db.yml
     secrets: inherit
     with:
       db1: 'true'
