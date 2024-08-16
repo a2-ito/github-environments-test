@@ -42,7 +42,7 @@ jobs:
     if: always()
     needs: changes
     # needs: call-infra
-    uses: ./.github/workflows/workflow-db1.yml
+    uses: ./.github/workflows/workflow-db.yml
     secrets: inherit
 
   call-app:
