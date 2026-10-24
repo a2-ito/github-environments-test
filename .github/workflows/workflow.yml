@@ -3,10 +3,10 @@ name: Main workflow
 on:
   push:
     paths:
-      - 'infrastructure/**'
-      - 'app1/**'
-      - '.github/workflows/**'
-      - 'db1/**'
+      - "infrastructure/**"
+      - "app1/**"
+      - ".github/workflows/**"
+      - "db1/**"
     branches:
       - "main"
 
@@ -25,17 +25,17 @@ jobs:
       app1: ${{ steps.filter.outputs.app1 }}
       db1: ${{ steps.filter.outputs.db1 }}
     steps:
-    - uses: actions/checkout@v3
-    - uses: dorny/paths-filter@v3
-      id: filter
-      with:
-        filters: |
-          infra:
-            - 'infrastructure/**'
-          app1:
-            - 'app1/**'
-          db1:
-            - 'db1/**'
+      - uses: actions/checkout@v3
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            infra:
+              - 'infrastructure/**'
+            app1:
+              - 'app1/**'
+            db1:
+              - 'db1/**'
 
   call-infra:
     needs: changes
@@ -53,8 +53,8 @@ jobs:
     needs: call-infra
     if: always() && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled')
     steps:
-    - name: Run Shell
-      run: echo "Hello World"
+      - name: Run Shell
+        run: echo "Hello World"
 
   # needs で指定したジョブがスキップした場合、changes の outputs が 正しく取得できなくてスキップされてしまう
   # call-infra がスキップされた場合のジョブと、スキップされていない場合のジョブを用意しておく
@@ -85,7 +85,7 @@ jobs:
   # スキップされた場合
   # call-db1 と重複して処理されないようにする必要がある
   call-db-skipped:
-    needs: 
+    needs:
       - changes
       - call-infra
     # if: always()
